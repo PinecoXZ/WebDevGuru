@@ -1,0 +1,476 @@
+/* ==========================================================================
+   WebDevGuru Design System — Swiss Precision & Architectural Engineering
+   Inspired by Aristide Benoist, Studio Freight, and Locomotive (Awwwards SOTD)
+   Colors: Architectural Carbon (#090a0c), Pure White, Vermilion Red-Orange (#ff3b00)
+   Typography: Syne (Display), Instrument Serif (Editorial), Plus Jakarta Sans, Space Mono
+   ========================================================================== */
+
+:root {
+  /* Surface & Background Tokens (Deep Architectural Carbon) */
+  --bg-primary: #090a0c;
+  --bg-surface: #111317;
+  --bg-surface-elevated: #171920;
+  --bg-surface-popover: #1c1e26;
+  --bg-glass: rgba(13, 15, 18, 0.82);
+  --bg-glass-card: rgba(255, 255, 255, 0.018);
+  --bg-glass-hover: rgba(255, 255, 255, 0.035);
+
+  /* Legacy & structural aliases */
+  --bg-dark: var(--bg-primary);
+  --bg-noir: var(--bg-primary);
+  --bg-card: var(--bg-surface);
+  --bg-card-elevated: var(--bg-surface-elevated);
+  --bg-inner: #0d0f13;
+
+  /* Studio Brand Accents (Swiss International Style) */
+  --accent-vermilion: #ff3b00;
+  --accent-vermilion-light: #ff5722;
+  --accent-vermilion-subtle: rgba(255, 59, 0, 0.08);
+  --accent-vermilion-border: rgba(255, 59, 0, 0.22);
+  --accent-emerald: #00e599;
+  --accent-emerald-subtle: rgba(0, 229, 153, 0.08);
+  --accent-cyan: #00d2ff;
+  --accent-amber: #ffaa00;
+
+  /* Primary Brand Mapping */
+  --color-brand: var(--accent-vermilion);
+  --color-brand-light: var(--accent-vermilion-light);
+  --primary: var(--accent-vermilion);
+  --primary-light: var(--accent-vermilion-light);
+  --primary-subtle: var(--accent-vermilion-subtle);
+  --primary-border: var(--accent-vermilion-border);
+  --gold-primary: var(--accent-vermilion);
+  --gold-light: #ffffff;
+  --color-orange: var(--accent-vermilion);
+  --color-orange-light: var(--accent-vermilion-light);
+  --color-yellow: #ffffff;
+  --stonks-green: var(--accent-emerald);
+
+  /* Typography Stacks */
+  --font-display: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Syne', var(--font-sans);
+  --font-mono: 'Space Mono', Menlo, Consolas, monospace;
+
+  /* Text Colors */
+  --text-white: #ffffff;
+  --text-primary: #f2f3f7;
+  --text-secondary: #8e919c;
+  --text-muted: #5e616c;
+  --text-dim: #383a42;
+  --text-main: var(--text-primary);
+  --text-dark: #090a0c;
+
+  /* Borders & Technical Grids */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-card: rgba(255, 255, 255, 0.09);
+  --border-card-hover: rgba(255, 255, 255, 0.2);
+  --border-vermilion: rgba(255, 59, 0, 0.4);
+  --border-dark: var(--border-subtle);
+  --border-thick: 1px solid var(--border-card);
+  --border-card-thick: 1px solid var(--border-card);
+  --border-orange-thick: 1px solid var(--accent-vermilion);
+
+  /* Clean Shadows & Depth (No mushy blur halos) */
+  --shadow-subtle: 0 4px 16px -2px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 10px 30px -4px rgba(0, 0, 0, 0.6);
+  --shadow-card-hover: 0 16px 40px -6px rgba(0, 0, 0, 0.75);
+  --shadow-vermilion: 0 8px 24px -4px rgba(255, 59, 0, 0.35);
+
+  /* Border Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Additional Surface & Component Aliases */
+  --bg-tertiary: var(--bg-surface-elevated);
+  --text-tertiary: var(--text-muted);
+  --border-hover: var(--border-card-hover);
+  --accent-emerald-light: #10b981;
+  --accent-indigo-light: var(--accent-vermilion);
+  --font-editorial: var(--font-serif);
+
+  /* Spacing Scale (Fluid Clamp) */
+  --space-2xs: clamp(4px, 0.5vw, 6px);
+  --space-xs: clamp(8px, 1vw, 12px);
+  --space-sm: clamp(12px, 1.5vw, 16px);
+  --space-md: clamp(16px, 2vw, 24px);
+  --space-lg: clamp(24px, 3vw, 40px);
+  --space-xl: clamp(40px, 5vw, 64px);
+  --space-2xl: clamp(64px, 8vw, 110px);
+  --space-3xl: clamp(96px, 12vw, 160px);
+
+  /* Transitions */
+  --transition-instant: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Base Elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: var(--bg-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+  /* Architectural Blueprint Grid Pattern — No AI purple blobs! */
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-attachment: fixed;
+}
+
+::selection {
+  background-color: var(--accent-vermilion);
+  color: #ffffff;
+}
+
+/* Layout Containers */
+.container {
+  width: 100%;
+  max-width: 1260px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 4vw, 48px);
+  padding-right: clamp(20px, 4vw, 48px);
+}
+
+.section-padding {
+  padding-top: clamp(72px, 9vw, 130px);
+  padding-bottom: clamp(72px, 9vw, 130px);
+}
+
+/* Typography Hierarchy */
+.heading-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 5.8rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: var(--text-white);
+  text-wrap: balance;
+}
+
+.heading-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--text-white);
+  text-wrap: balance;
+}
+
+.heading-h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.6vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--text-white);
+  text-wrap: balance;
+}
+
+.heading-h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--text-white);
+}
+
+.editorial-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+}
+
+.text-vermilion, .highlight-vermilion {
+  color: var(--accent-vermilion);
+  font-style: inherit;
+}
+
+.text-body {
+  font-size: clamp(0.95rem, 0.3vw + 0.85rem, 1.05rem);
+  color: var(--text-secondary);
+  line-height: 1.68;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+
+.text-body-lg {
+  font-size: clamp(1.05rem, 0.4vw + 0.95rem, 1.25rem);
+  color: var(--text-secondary);
+  line-height: 1.62;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+/* Text Shimmers without purple */
+.gradient-text, .wavy-accent, .italic-luxury {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: #ffffff;
+  display: inline;
+}
+
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label-mono .mono-bullet {
+  color: var(--accent-vermilion);
+}
+
+/* Swiss Architectural Badges */
+.sticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-white);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  transition: all var(--transition-fast);
+}
+
+.sticker-badge:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.badge-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-vermilion);
+  box-shadow: 0 0 10px rgba(255, 59, 0, 0.8);
+  animation: pulse-vermilion 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-vermilion {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+
+/* Buttons — Solid High-Contrast Architectural Craft */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  border-radius: 9999px;
+  padding: 13px 28px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+/* Primary: Solid Pure White with Jet Black Text */
+.btn-primary {
+  background: #ffffff;
+  color: #090a0c;
+  border-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+  background: #f0f0f5;
+  color: #090a0c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+}
+
+/* Vermilion Accent CTA */
+.btn-vermilion {
+  background: var(--accent-vermilion);
+  color: #ffffff;
+  border-color: var(--accent-vermilion);
+  box-shadow: var(--shadow-vermilion);
+}
+
+.btn-vermilion:hover {
+  background: var(--accent-vermilion-light);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(255, 59, 0, 0.45);
+}
+
+/* Secondary: Minimalist Architectural Ghost */
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-white);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.btn-link:hover {
+  color: var(--accent-vermilion);
+  gap: 10px;
+}
+
+/* Architectural Panels & Cards */
+.obsidian-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+  overflow: hidden;
+}
+
+.obsidian-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.obsidian-card-vermilion, .obsidian-card-gold {
+  border-color: var(--accent-vermilion-border);
+}
+
+.obsidian-card-vermilion:hover, .obsidian-card-gold:hover {
+  border-color: var(--accent-vermilion);
+}
+
+/* Technical Category Pills & Metric Badges */
+.category-pill, .sticker-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-metric-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: rgba(0, 229, 153, 0.08);
+  border: 1px solid rgba(0, 229, 153, 0.25);
+  color: var(--accent-emerald);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* Grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-2, .grid-3, .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

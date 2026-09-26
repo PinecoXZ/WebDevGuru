@@ -1,0 +1,31 @@
+# WebDevGuru
+> Bespoke Digital Flagships & Sub-Second Engineering Architecture.
+
+WebDevGuru is an elite digital engineering studio specializing in bespoke high-converting React platforms, high-velocity SaaS growth engines, and headless Shopify storefronts. Built for founders and marketing leaders who demand sub-second load times, flawless typography, and measurable commercial results.
+
+## Core Services
+- [High-Converting Flagships](https://webdevguru.tech/services/conversion-websites): Bespoke digital flagships engineered for market leaders. React 19 architecture, custom design systems, and sub-second Core Web Vitals.
+- [SaaS Growth Engines](https://webdevguru.tech/services/saas-landing-pages): Positioning architecture, narrative-driven product showcases, and friction-free sign-up flows that accelerate trial-to-paid velocity.
+- [Headless Shopify D2C](https://webdevguru.tech/services/d2c-shopify): High-AOV direct-to-consumer e-commerce flagships with instant drawer carts and single-tap checkout.
+
+## Selected Case Studies
+- [Lumina AI Platform](https://webdevguru.tech/project/dogemerch): Bespoke enterprise platform driving a +380% increase in qualified pipeline.
+- [Verve Haute Commerce](https://webdevguru.tech/project/gigachad-crm): Ultra-luxury headless storefront producing +290% checkout velocity.
+- [Chronos Capital Terminal](https://webdevguru.tech/project/brainrot-arcade): Institutional fintech workspace with 0.32s global edge latency.
+- [Synthetix Health Labs](https://webdevguru.tech/project/based-nutrition): Next-gen longevity storefront delivering +340% subscription MRR.
+- [Kinetix Spatial OS](https://webdevguru.tech/project/stonks-capital): Spatial computing product launch with 14.2M launch views.
+- [Zenith Horology Guild](https://webdevguru.tech/project/zenith-chrono): Luxury timepiece salon driving 4.8x VIP consultation inquiries.
+
+## Studio Architecture
+- **Aesthetic**: Swiss Precision Architectural Carbon & International Vermilion
+- **Typography**: Syne (Display), Instrument Serif (Editorial Accent), Plus Jakarta Sans (UI), Space Mono (Data)
+- **Palette**: Deep Architectural Carbon (#090a0c), Pure White (#ffffff), International Vermilion (#ff3b00)
+- **Performance**: Sub-second Largest Contentful Paint (LCP < 0.5s), Google Lighthouse 99/100
+- **Codebase**: React 19, TypeScript, Vite, Reicon Icon System, Zero Bloat
+
+## Contact & Inquiries
+- Website: https://webdevguru.tech
+- Signature Builds: https://webdevguru.tech/work
+- About Studio: https://webdevguru.tech/about
+- Project Inquiries: https://webdevguru.tech/#services
+- Founder Direct: founder@webdevguru.tech

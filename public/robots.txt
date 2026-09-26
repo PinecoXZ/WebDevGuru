@@ -1,0 +1,10 @@
+# WebDevGuru Robots.txt
+# https://webdevguru.tech
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://webdevguru.tech/sitemap.xml
+

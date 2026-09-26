@@ -1,174 +1,119 @@
-import { useEffect } from 'react';
-import { useModal } from '../context/ModalContext';
-import Navbar from '../components/Navbar';
-import ScrollReveal from '../components/ScrollReveal';
-import RevealText from '../components/RevealText';
-import MagneticButton from '../components/MagneticButton';
-import ContactForm from '../components/ContactForm';
+import { ArrowUpRight, ShoppingBag, Mobile, Refresh, Card } from 'reicon-react';
+import Breadcrumbs from '../components/Breadcrumbs';
 import SEO from '../components/SEO';
 import { useSEO } from '../hooks/useSEO';
-import { getServiceSchema } from '../utils/schemas';
-import { track } from '../utils/analytics';
+import { useModal } from '../hooks/useModal';
+import { getD2CShopifySchema } from '../utils/schemas';
 import './ServiceDetail.css';
+
+const DELIVERABLES = [
+  {
+    icon: <ShoppingBag size={22} weight="Outline" />,
+    title: "Bespoke Shopify Theme Engineering",
+    desc: "Engineered from scratch using Shopify Liquid & Hydrogen without bloated marketplace templates or conflicting third-party scripts."
+  },
+  {
+    icon: <Mobile size={22} weight="Outline" />,
+    title: "Mobile-First Fluid Commerce UI",
+    desc: "Over 82% of premium D2C transactions happen on smartphones. We architect sticky thumb-zone checkout trays, instant variant galleries, and zero layout shift."
+  },
+  {
+    icon: <Card size={22} weight="Outline" />,
+    title: "High-AOV Upsell & Dynamic Cart Engines",
+    desc: "Slide-out intelligent cart drawers featuring tiered free-shipping thresholds, automated 1-click bundle recommendations, and seamless checkout pipelines."
+  },
+  {
+    icon: <Refresh size={22} weight="Outline" />,
+    title: "Global Multi-Currency & Subscription Portals",
+    desc: "Shopify Markets localization, geolocation-aware currency pricing, and frictionless recurring subscription management integrations."
+  }
+];
 
 const D2CShopify = () => {
   const { openModal } = useModal();
 
-  useEffect(() => {
-    track('service_page_viewed', { service: 'D2C Shopify Experiences' });
-  }, []);
-
   const seoProps = useSEO({
-    title: "D2C Shopify Experience Design — WebDevGuru",
-    description: "Custom Shopify stores built for scale, speed, and unforgettable brand storytelling.",
-    schema: getServiceSchema("D2C Shopify Experiences", "Custom Shopify stores built for scale and storytelling.")
+    title: "Custom Shopify & Headless D2C Stores — WebDevGuru",
+    description: "Custom Shopify stores and headless e-commerce architectures engineered for sub-second speed, brand prestige, and maximum average order value.",
+    schema: getD2CShopifySchema()
   });
 
-  const navLinks = [
-    { label: "Home", href: "/", cursor: "Home" },
-    { label: "Work", href: "/work", cursor: "Work" },
-    { label: "About", href: "/about", cursor: "About" },
-    { label: "Websites", href: "/services/conversion-websites", cursor: "Web" },
-    { label: "SaaS", href: "/services/saas-landing-pages", cursor: "SaaS" }
-  ];
-
-  const deliverables = [
-    { title: "Custom Shopify OS 2.0 Build", desc: "Modular, high-performance themes built with the latest Shopify features." },
-    { title: "AOV Lift Strategy", desc: "Strategic cross-sells, upsells, and bundle architectures to increase order value." },
-    { title: "Product Page Mastery", desc: "High-converting PDPs that balance technical specs with emotional brand story." },
-    { title: "Checkout Optimization", desc: "Reducing friction at the final step to minimize cart abandonment." },
-    { title: "Brand Narrative Design", desc: "Editorial-grade visuals that communicate your brand's unique authority." },
-    { title: "Speed & Performance", desc: "Optimized for mobile-first shoppers with sub-2 second load times." },
-    { title: "App Stack Consolidation", desc: "Reducing bloat by replacing unnecessary apps with custom code." },
-    { title: "Inventory & ERP Sync", desc: "Seamless integration with your backend operations and warehouse." }
-  ];
-
-  const whoItsFor = [
-    { title: "Scaling D2C Brands", desc: "Brands doing ₹10Cr+ in annual sales that have outgrown their basic Shopify theme." },
-    { title: "Luxury Retailers", desc: "High-end product companies that need their digital store to feel like a premium boutique." },
-    { title: "Omnichannel Brands", desc: "Companies selling across multiple platforms that need a unified digital flagship." }
-  ];
-
-  const process = [
-    { title: "Store Audit", desc: "We identify performance bottlenecks and UX friction in your current store." },
-    { title: "Design Systems", desc: "We build a reusable UI kit for your brand to ensure consistency across all pages." },
-    { title: "Shopify Engineering", desc: "We build your store using clean, maintainable Liquid and custom JS." },
-    { title: "Conversion Launch", desc: "We go live with a focus on stable transition and immediate performance lift." }
-  ];
-
   return (
-    <div className="service-detail">
+    <div className="service-detail-page">
       <SEO {...seoProps} />
-      <Navbar customLinks={navLinks} />
-      
-      <section className="service-hero">
-        <ScrollReveal>
-          <span className="label-mono">Shopify Service</span>
-        </ScrollReveal>
-        <RevealText 
-          text="Shopify Stores Built for Scale, Speed, and Story."
-          tag="h1"
-          className="service-title"
-        />
-        <ScrollReveal delay={0.4}>
-          <div className="service-hero-ctas">
-            <MagneticButton dataCursor="Book">
-              <button onClick={() => openModal(<ContactForm />)} className="cta-primary sheen">
-                <span className="btn-label">
-                  <span className="btn-text-reveal" data-text="Book Scope Call">Book Scope Call</span>
-                </span>
+
+      <section className="service-hero-section">
+        <div className="container">
+          <Breadcrumbs items={[
+            { label: 'Home', href: '/' },
+            { label: 'Capabilities', href: '/#services' },
+            { label: 'Headless Shopify D2C' }
+          ]} />
+
+          <div className="service-hero-content">
+            <span className="label-mono">HIGH-PERFORMANCE COMMERCE PLATFORMS</span>
+            <h1 className="heading-display service-title">
+              Custom Shopify &amp; <br />
+              <span className="wavy-accent">Headless D2C Stores.</span>
+            </h1>
+            <p className="text-body-lg service-lead">
+              Modern digital commerce is won on mobile responsiveness and zero-friction purchase flows. We engineer custom Shopify storefronts that turn casual visitors into loyal repeat customers with industry-leading checkout velocity.
+            </p>
+
+            <div className="service-cta-row">
+              <button 
+                onClick={() => {
+                  openModal(null);
+                }} 
+                className="btn btn-primary"
+              >
+                <span>Book E-Commerce Scope Call</span>
+                <ArrowUpRight size={16} weight="Outline" />
               </button>
-            </MagneticButton>
+              <a href="#deliverables" className="btn btn-secondary">
+                <span>Review Commerce Features</span>
+              </a>
+            </div>
           </div>
-        </ScrollReveal>
+        </div>
       </section>
 
-      <section className="section-padding">
-        <ScrollReveal>
-          <span className="label-mono">The Deliverables</span>
-          <h2 className="section-title">What's Included</h2>
-        </ScrollReveal>
-        <div className="included-grid">
-          {deliverables.map((item, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="included-card">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
+      {/* Deliverables Grid */}
+      <section id="deliverables" className="section-padding">
+        <div className="container">
+          <div className="section-header">
+            <span className="label-mono">COMMERCE DELIVERABLES</span>
+            <h2 className="heading-h2" style={{ marginTop: '8px' }}>
+              Engineered for Maximum Average <span className="wavy-accent">Order Value.</span>
+            </h2>
+          </div>
+
+          <div className="deliverables-grid">
+            {DELIVERABLES.map((item, idx) => (
+              <div key={idx} className="deliverable-card obsidian-card">
+                <div className="deliverable-icon">{item.icon}</div>
+                <h3 className="deliverable-title">{item.title}</h3>
+                <p className="text-body" style={{ fontSize: '0.94rem' }}>{item.desc}</p>
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
 
-      <section className="section-padding bg-warm">
-        <ScrollReveal>
-          <span className="label-mono">Ideal Partners</span>
-          <h2 className="section-title">Who It's For</h2>
-        </ScrollReveal>
-        <div className="who-grid">
-          {whoItsFor.map((item, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="who-card">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <ScrollReveal>
-          <span className="label-mono">The Roadmap</span>
-          <h2 className="section-title">Our Process</h2>
-        </ScrollReveal>
-        <div className="process-list">
-          {process.map((step, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="process-step">
-                <div className="step-number">0{i + 1}</div>
-                <div className="step-content">
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-padding bg-warm">
-        <ScrollReveal>
-          <span className="label-mono">Impact</span>
-          <h2 className="section-title">The Results</h2>
-        </ScrollReveal>
-        <div className="results-stats">
-          <ScrollReveal>
-            <div className="result-card">
-              <span className="result-value">+85%</span>
-              <span className="result-label">Avg AOV Increase</span>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
-            <div className="result-card">
-              <span className="result-value">312%</span>
-              <span className="result-label">Avg Sales Growth</span>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="final-cta-section">
-        <ScrollReveal>
-          <h2>Ready to build?</h2>
-          <MagneticButton dataCursor="Book">
-            <button onClick={() => openModal(<ContactForm />)} className="cta-button-main sheen">
-              <span className="btn-label">
-                <span className="btn-text-reveal" data-text="Book Scope Call">Book Scope Call</span>
-              </span>
+          <div className="service-faq-strip obsidian-card text-center">
+            <h3 className="heading-h2">Sub-Second Mobile Checkout Guarantee</h3>
+            <p className="text-body" style={{ maxWidth: '640px', margin: '12px auto 28px' }}>
+              Every 100ms improvement in site speed increases customer conversion by up to 1%. We eliminate third-party script latency to give your buyers an effortless, instant shopping journey.
+            </p>
+            <button 
+              onClick={() => {
+                openModal(null);
+              }} 
+              className="btn btn-primary"
+            >
+              <span>Schedule Storefront Audit</span>
+              <ArrowUpRight size={16} weight="Outline" />
             </button>
-          </MagneticButton>
-        </ScrollReveal>
+          </div>
+        </div>
       </section>
     </div>
   );

@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+
+export const SITE_DOMAIN = 'https://webdevguru.tech';
+export const DEFAULT_OG_IMAGE = `${SITE_DOMAIN}/og-image.svg`;
 
 interface SEOProps {
   title: string;
@@ -7,24 +9,22 @@ interface SEOProps {
   ogImage?: string;
   canonicalUrl?: string;
   noindex?: boolean;
-  schema?: Record<string, any>;
+  schema?: Record<string, unknown>;
 }
 
 export const useSEO = ({ 
   title, 
   description, 
-  ogImage = '/og-image.jpg', 
+  ogImage = DEFAULT_OG_IMAGE, 
   canonicalUrl,
   noindex = false,
   schema
 }: SEOProps) => {
   const location = useLocation();
-  const currentUrl = canonicalUrl || `https://webdevguru.tech${location.pathname}`;
-
-  useEffect(() => {
-    // We handle the actual tag updates via Helmet in the component return,
-    // but this hook helps centralize the logic and properties.
-  }, [location]);
+  
+  // Clean canonical path (remove trailing slash except for root)
+  const cleanPath = location.pathname === '/' ? '' : location.pathname.replace(/\/$/, '');
+  const currentUrl = canonicalUrl || `${SITE_DOMAIN}${cleanPath || '/'}`;
 
   return {
     title,

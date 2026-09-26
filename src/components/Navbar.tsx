@@ -1,62 +1,212 @@
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import ThemeToggle from './ThemeToggle';
-import MagneticButton from './MagneticButton';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, CloseCircle, ArrowUpRight } from 'reicon-react';
+import { useModal } from '../hooks/useModal';
 import './Navbar.css';
 
-interface NavLink {
-  label: string;
-  href: string;
-  cursor: string;
-}
+const NAV_LINKS = [
+  { label: 'Work', href: '/work' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Architecture', href: '/#comparison' },
+  { label: 'Process', href: '/#process' },
+  { label: 'About', href: '/about' }
+];
 
-interface NavbarProps {
-  customLinks?: NavLink[];
-}
+const Navbar = () => {
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const { openModal } = useModal();
 
-const Navbar: React.FC<NavbarProps> = ({ customLinks }) => {
-  const defaultLinks: NavLink[] = [
-    { label: "Work", href: "/work", cursor: "Work" },
-    { label: "About", href: "/about", cursor: "About" },
-    { label: "Services", href: "/#services", cursor: "Services" },
-    { label: "Pricing", href: "/#pricing", cursor: "Pricing" }
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const links = customLinks || defaultLinks;
+  useEffect(() => {
+    const handlePopState = () => setIsMobileOpen(false);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    if (isMobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileOpen]);
+
+  const handleLinkClick = (href: string) => {
+    setIsMobileOpen(false);
+    if (href.startsWith('/#') && location.pathname === '/') {
+      const id = href.replace('/#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
-    <motion.nav 
-      className="navbar"
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <Link to="/" className="nav-logo" data-cursor="Home">
-        <span className="logo-text">WEBDEV<span className="text-gold">GURU</span></span>
-      </Link>
-      
-      <div className="nav-links">
-        {links.map((link, i) => (
-          <MagneticButton key={i} dataCursor={link.cursor}>
-            {link.href.startsWith('/') ? (
-              link.href.startsWith('/#') ? (
-                <a href={link.href} className="nav-link" data-cursor={link.cursor}>{link.label}</a>
-              ) : (
-                <Link to={link.href} className="nav-link" data-cursor={link.cursor}>{link.label}</Link>
-              )
+    <header className={`studio-navbar-wrap ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="studio-navbar container">
+        {/* Brand Logo */}
+        <Link 
+          to="/" 
+          className="studio-brand" 
+          aria-label="WebDevGuru Studio Home"
+        >
+          <div className="studio-logo-mark">
+            <span className="studio-logo-glyph">W</span>
+            <span className="studio-logo-dot"></span>
+          </div>
+          <div className="studio-brand-text">
+            <span className="studio-brand-name">
+              WEBDEV<span className="studio-brand-accent">GURU</span>
+            </span>
+            <span className="studio-brand-tag">DIGITAL FLAGSHIPS</span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation Links */}
+        <nav className="studio-nav-links" aria-label="Main Navigation">
+          {NAV_LINKS.map((item) => {
+            const isAnchor = item.href.startsWith('/#');
+            if (isAnchor) {
+              return (
+                <a 
+                  key={item.label} 
+                  href={item.href}
+                  className="studio-nav-link"
+                  onClick={() => handleLinkClick(item.href)}
+                >
+                  <span>{item.label}</span>
+                </a>
+              );
+            }
+            const isActive = location.pathname === item.href;
+            return (
+              <Link 
+                key={item.label} 
+                to={item.href}
+                className={`studio-nav-link ${isActive ? 'active' : ''}`}
+                onClick={() => handleLinkClick(item.href)}
+              >
+                <span>{item.label}</span>
+                {isActive && <span className="nav-active-pill" />}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Action Controls & CTA */}
+        <div className="studio-nav-actions">
+          {/* Availability Status Badge */}
+          <div className="studio-status-pill hidden-mobile">
+            <span className="badge-pulse-dot" />
+            <span className="studio-status-label">Q2/Q3 SLOTS AVAILABLE</span>
+          </div>
+
+          {/* Primary CTA */}
+          <button 
+            onClick={() => openModal(null)}
+            className="studio-nav-cta"
+          >
+            <span>Start a Project</span>
+            <ArrowUpRight size={18} weight="Outline" />
+          </button>
+
+          {/* Mobile Hamburger Toggle */}
+          <button 
+            className="studio-mobile-toggle"
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileOpen ? (
+              <CloseCircle size={24} weight="Outline" />
             ) : (
-              <a href={link.href} className="nav-link" data-cursor={link.cursor}>{link.label}</a>
+              <Menu size={24} weight="Outline" />
             )}
-          </MagneticButton>
-        ))}
-        <ThemeToggle />
+          </button>
+        </div>
       </div>
 
-      <div className="nav-menu-btn">
-        <div className="menu-line"></div>
-        <div className="menu-line"></div>
-      </div>
-    </motion.nav>
+      {/* Mobile Drawer */}
+      {isMobileOpen && (
+        <div className="studio-drawer-overlay" onClick={() => setIsMobileOpen(false)}>
+          <div className="studio-drawer-content" onClick={(e) => e.stopPropagation()}>
+            <div className="studio-drawer-header">
+              <Link to="/" className="studio-brand" onClick={() => setIsMobileOpen(false)}>
+                <div className="studio-logo-mark">
+                  <span className="studio-logo-glyph">W</span>
+                  <span className="studio-logo-dot"></span>
+                </div>
+                <div className="studio-brand-text">
+                  <span className="studio-brand-name">
+                    WEBDEV<span className="studio-brand-accent">GURU</span>
+                  </span>
+                </div>
+              </Link>
+              <button 
+                className="studio-drawer-close"
+                onClick={() => setIsMobileOpen(false)}
+                aria-label="Close menu"
+              >
+                <CloseCircle size={24} weight="Outline" />
+              </button>
+            </div>
+
+            <nav className="studio-drawer-links">
+              {NAV_LINKS.map((item) => {
+                if (item.href.startsWith('/#')) {
+                  return (
+                    <a 
+                      key={item.label} 
+                      href={item.href}
+                      className="studio-drawer-link"
+                      onClick={() => handleLinkClick(item.href)}
+                    >
+                      {item.label}
+                    </a>
+                  );
+                }
+                return (
+                  <Link 
+                    key={item.label} 
+                    to={item.href}
+                    className={`studio-drawer-link ${location.pathname === item.href ? 'active' : ''}`}
+                    onClick={() => handleLinkClick(item.href)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="studio-drawer-footer">
+              <button 
+                onClick={() => {
+                  setIsMobileOpen(false);
+                  openModal(null);
+                }}
+                className="btn btn-primary"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                <span>Start a Project</span>
+                <ArrowUpRight size={18} weight="Outline" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
   );
 };
 

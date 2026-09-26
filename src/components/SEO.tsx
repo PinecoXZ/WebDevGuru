@@ -6,7 +6,7 @@ interface SEOComponentProps {
   ogImage?: string;
   currentUrl: string;
   noindex?: boolean;
-  schema?: Record<string, any>;
+  schema?: Record<string, unknown>;
 }
 
 const SEO = ({ 

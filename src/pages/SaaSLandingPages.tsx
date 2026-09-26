@@ -1,174 +1,125 @@
-import { useEffect } from 'react';
-import { useModal } from '../context/ModalContext';
-import Navbar from '../components/Navbar';
-import ScrollReveal from '../components/ScrollReveal';
-import RevealText from '../components/RevealText';
-import MagneticButton from '../components/MagneticButton';
-import ContactForm from '../components/ContactForm';
+import { ArrowUpRight, Bolt, ChartBar, Users, Lock } from 'reicon-react';
+import Breadcrumbs from '../components/Breadcrumbs';
 import SEO from '../components/SEO';
 import { useSEO } from '../hooks/useSEO';
-import { getServiceSchema } from '../utils/schemas';
-import { track } from '../utils/analytics';
+import { useModal } from '../hooks/useModal';
+import { getSaaSLandingPagesSchema } from '../utils/schemas';
 import './ServiceDetail.css';
+
+const DELIVERABLES = [
+  {
+    icon: <Bolt size={22} weight="Outline" color="var(--accent-vermilion)" />,
+    title: "Interactive Product Simulation",
+    desc: "Demonstrate software value in 3 seconds. We build interactive feature walkthroughs and mock UI demos directly inside the marketing page."
+  },
+  {
+    icon: <ChartBar size={22} weight="Outline" color="var(--accent-vermilion)" />,
+    title: "Dynamic ROI & Value Calculators",
+    desc: "Allow prospective buyers to calculate time or dollars saved. Interactive calculators create high-intent commitment before signup."
+  },
+  {
+    icon: <Users size={22} weight="Outline" color="var(--accent-vermilion)" />,
+    title: "High-Status Social Proof Modules",
+    desc: "Wall of Love testimonials, interactive customer logo carousels, and verified rating badges engineered for B2B credibility."
+  },
+  {
+    icon: <Lock size={22} weight="Outline" color="var(--accent-vermilion)" />,
+    title: "Seamless Auth & Stripe Checkout",
+    desc: "One-click trial signup flows integrated directly with Clerk, Supabase, Auth0, or Stripe Checkout for zero friction."
+  }
+];
 
 const SaaSLandingPages = () => {
   const { openModal } = useModal();
 
-  useEffect(() => {
-    track('service_page_viewed', { service: 'SaaS Landing Pages' });
-  }, []);
-
   const seoProps = useSEO({
-    title: "SaaS Landing Page Design — WebDevGuru",
-    description: "Precision-engineered landing pages that turn cold traffic into recurring revenue machines.",
-    schema: getServiceSchema("SaaS Landing Pages", "Precision-engineered landing pages for SaaS companies.")
+    title: "High-Impact SaaS Growth Engines — WebDevGuru Studio",
+    description: "Precision-engineered landing pages and growth funnels turning cold traffic into recurring revenue for venture-backed SaaS.",
+    schema: getSaaSLandingPagesSchema()
   });
 
-  const navLinks = [
-    { label: "Home", href: "/", cursor: "Home" },
-    { label: "Work", href: "/work", cursor: "Work" },
-    { label: "About", href: "/about", cursor: "About" },
-    { label: "Websites", href: "/services/conversion-websites", cursor: "Web" },
-    { label: "Shopify", href: "/services/d2c-shopify", cursor: "Shopify" }
-  ];
-
-  const deliverables = [
-    { title: "Trial-to-Paid Architecture", desc: "User flows engineered to minimize friction and maximize activation." },
-    { title: "Pricing Page Strategy", desc: "Psychologically-driven tier structures and feature comparisons." },
-    { title: "Feature Storytelling", desc: "Translating complex technical capabilities into tangible business outcomes." },
-    { title: "Social Proof Integration", desc: "Strategic placement of logos, testimonials, and case study highlights." },
-    { title: "Interactive Product Demos", desc: "Engaging visual walkthroughs that showcase the platform's value." },
-    { title: "Performance Engineering", desc: "Lighting fast load times to ensure developers and buyers stay engaged." },
-    { title: "Analytics Integration", desc: "Deep tracking of demo signups, trial starts, and scroll depth." },
-    { title: "A/B Testing Ready", desc: "Clean code structure that allows for rapid experimentation and testing." }
-  ];
-
-  const whoItsFor = [
-    { title: "Early-Stage VC Backed", desc: "SaaS companies that need to demonstrate traction and user activation to investors." },
-    { title: "Growth-Stage Scaleups", desc: "Platforms moving upmarket that need a more professional, enterprise-grade presence." },
-    { title: "Bootstrap Founders", desc: "Independent SaaS builders who need a high-converting front-end without the overhead." }
-  ];
-
-  const process = [
-    { title: "Value Discovery", desc: "We identify the unique 'Aha!' moment of your software and build the page around it." },
-    { title: "High-Fidelity Design", desc: "We design a slick, modern interface that matches the quality of your platform." },
-    { title: "Frontend Engineering", desc: "We build the landing page using cutting-edge tech for peak performance." },
-    { title: "Feedback & Refinement", desc: "We fine-tune the animations and interactions based on initial user feedback." }
-  ];
-
   return (
-    <div className="service-detail">
+    <div className="service-detail-page">
       <SEO {...seoProps} />
-      <Navbar customLinks={navLinks} />
-      
-      <section className="service-hero">
-        <ScrollReveal>
-          <span className="label-mono">SaaS Service</span>
-        </ScrollReveal>
-        <RevealText 
-          text="Turn Demo Traffic Into Paying Customers."
-          tag="h1"
-          className="service-title"
-        />
-        <ScrollReveal delay={0.4}>
-          <div className="service-hero-ctas">
-            <MagneticButton dataCursor="Book">
-              <button onClick={() => openModal(<ContactForm />)} className="cta-primary sheen">
-                <span className="btn-label">
-                  <span className="btn-text-reveal" data-text="Book Scope Call">Book Scope Call</span>
-                </span>
+
+      <section className="service-hero-section">
+        <div className="container">
+          <Breadcrumbs items={[
+            { label: 'Home', href: '/' },
+            { label: 'Capabilities', href: '/#services' },
+            { label: 'SaaS Growth Engines' }
+          ]} />
+
+          <div className="service-hero-content">
+            <div className="sticker-badge mb-3">
+              <span className="badge-pulse-dot" />
+              <span>HIGH-VELOCITY SOFTWARE POSITIONING</span>
+            </div>
+
+            <h1 className="heading-display service-title">
+              High-Impact <br />
+              <span className="gradient-text">SaaS Growth Engines.</span>
+            </h1>
+
+            <p className="text-body-lg service-lead">
+              Transform complex software capability into visceral commercial value. We engineer SaaS marketing sites that maximize paid acquisition ROAS and accelerate trial-to-paid velocity.
+            </p>
+
+            <div className="service-cta-row">
+              <button 
+                onClick={() => {
+                  openModal(null);
+                }} 
+                className="btn btn-primary"
+              >
+                <span>Initiate SaaS Scope Sprint</span>
+                <ArrowUpRight size={18} weight="Outline" />
               </button>
-            </MagneticButton>
+              <a href="#deliverables" className="btn btn-secondary">
+                <span>View Architecture Stack</span>
+              </a>
+            </div>
           </div>
-        </ScrollReveal>
+        </div>
       </section>
 
-      <section className="section-padding">
-        <ScrollReveal>
-          <span className="label-mono">The Deliverables</span>
-          <h2 className="section-title">What's Included</h2>
-        </ScrollReveal>
-        <div className="included-grid">
-          {deliverables.map((item, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="included-card">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
+      {/* Deliverables Grid */}
+      <section id="deliverables" className="section-padding">
+        <div className="container">
+          <div className="section-header">
+            <span className="label-mono">ENGINEERING SCOPE</span>
+            <h2 className="heading-h2" style={{ marginTop: '8px' }}>
+              Engineered to Turn Visitors into <span className="gradient-text">Paying Accounts.</span>
+            </h2>
+          </div>
+
+          <div className="deliverables-grid">
+            {DELIVERABLES.map((item, idx) => (
+              <div key={idx} className="deliverable-card obsidian-card">
+                <div className="deliverable-icon">{item.icon}</div>
+                <h3 className="deliverable-title">{item.title}</h3>
+                <p className="text-body" style={{ fontSize: '0.94rem' }}>{item.desc}</p>
               </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
 
-      <section className="section-padding bg-warm">
-        <ScrollReveal>
-          <span className="label-mono">Ideal Partners</span>
-          <h2 className="section-title">Who It's For</h2>
-        </ScrollReveal>
-        <div className="who-grid">
-          {whoItsFor.map((item, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="who-card">
-                <h3>{item.title}</h3>
-                <p>{item.desc}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-padding">
-        <ScrollReveal>
-          <span className="label-mono">The Roadmap</span>
-          <h2 className="section-title">Our Process</h2>
-        </ScrollReveal>
-        <div className="process-list">
-          {process.map((step, i) => (
-            <ScrollReveal key={i} delay={i * 0.1}>
-              <div className="process-step">
-                <div className="step-number">0{i + 1}</div>
-                <div className="step-content">
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-padding bg-warm">
-        <ScrollReveal>
-          <span className="label-mono">Impact</span>
-          <h2 className="section-title">The Results</h2>
-        </ScrollReveal>
-        <div className="results-stats">
-          <ScrollReveal>
-            <div className="result-card">
-              <span className="result-value">+140%</span>
-              <span className="result-label">Trial Activation Rate</span>
-            </div>
-          </ScrollReveal>
-          <ScrollReveal delay={0.2}>
-            <div className="result-card">
-              <span className="result-value">22%</span>
-              <span className="result-label">Avg CAC Reduction</span>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section className="final-cta-section">
-        <ScrollReveal>
-          <h2>Ready to build?</h2>
-          <MagneticButton dataCursor="Book">
-            <button onClick={() => openModal(<ContactForm />)} className="cta-button-main sheen">
-              <span className="btn-label">
-                <span className="btn-text-reveal" data-text="Book Scope Call">Book Scope Call</span>
-              </span>
+          <div className="service-faq-strip obsidian-card text-center" style={{ marginTop: '48px' }}>
+            <span className="label-mono">PROVEN TRACK RECORD</span>
+            <h3 className="heading-h2" style={{ marginTop: '10px' }}>Tested Across Millions in Tracked Acquisition Spend</h3>
+            <p className="text-body" style={{ maxWidth: '640px', margin: '12px auto 28px' }}>
+              Our conversion frameworks are battle-tested against high-intent B2B and consumer paid traffic channels with sub-second LCP.
+            </p>
+            <button 
+              onClick={() => {
+                openModal(null);
+              }} 
+              className="btn btn-primary"
+            >
+              <span>Schedule Architecture Review</span>
+              <ArrowUpRight size={18} weight="Outline" />
             </button>
-          </MagneticButton>
-        </ScrollReveal>
+          </div>
+        </div>
       </section>
     </div>
   );

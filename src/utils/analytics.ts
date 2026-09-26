@@ -3,21 +3,23 @@ import posthog from 'posthog-js';
 export type WMEvent =
   | 'page_view'
   | 'hero_cta_clicked'
-  | 'pricing_plan_viewed'
+  | 'hero_primary_cta_clicked'
   | 'contact_modal_opened'
   | 'contact_form_submitted'
+  | 'discovery_form_submitted'
   | 'service_page_viewed'
   | 'work_filter_used'
-  | 'section_scrolled';
+  | 'final_cta_clicked'
+  | 'section_scrolled'
+  | (string & {});
 
 export function track(event: WMEvent, props?: Record<string, unknown>) {
-  // Only fire analytics if PostHog has consent (check posthog.has_opted_in_capturing())
-  // In this project, we assume consent is already wired via an existing mechanism 
-  // or we check the PostHog internal state.
-  if (posthog.has_opted_in_capturing()) {
-    posthog.capture(event, props);
-  } else if (import.meta.env.DEV) {
-    // For local testing, we can log to console
-    console.log(`[Analytics-DEV] ${event}`, props);
+  try {
+    // Only capture if PostHog has been initialized and user hasn't opted out
+    if (posthog.__loaded && !posthog.has_opted_out_capturing()) {
+      posthog.capture(event, props);
+    }
+  } catch {
+    // Graceful silent fallback if adblocker or privacy extension blocks PostHog
   }
 }
