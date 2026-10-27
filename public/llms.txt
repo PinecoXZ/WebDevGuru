@@ -9,12 +9,12 @@ WebDevGuru is an elite digital engineering studio specializing in bespoke high-c
 - [Headless Shopify D2C](https://webdevguru.tech/services/d2c-shopify): High-AOV direct-to-consumer e-commerce flagships with instant drawer carts and single-tap checkout.
 
 ## Selected Case Studies
-- [Lumina AI Platform](https://webdevguru.tech/project/dogemerch): Bespoke enterprise platform driving a +380% increase in qualified pipeline.
-- [Verve Haute Commerce](https://webdevguru.tech/project/gigachad-crm): Ultra-luxury headless storefront producing +290% checkout velocity.
-- [Chronos Capital Terminal](https://webdevguru.tech/project/brainrot-arcade): Institutional fintech workspace with 0.32s global edge latency.
-- [Synthetix Health Labs](https://webdevguru.tech/project/based-nutrition): Next-gen longevity storefront delivering +340% subscription MRR.
-- [Kinetix Spatial OS](https://webdevguru.tech/project/stonks-capital): Spatial computing product launch with 14.2M launch views.
-- [Zenith Horology Guild](https://webdevguru.tech/project/zenith-chrono): Luxury timepiece salon driving 4.8x VIP consultation inquiries.
+- [Lumina AI Platform](https://webdevguru.tech/project/lumina-ai): Bespoke enterprise platform driving a +380% increase in qualified pipeline.
+- [Verve Haute Commerce](https://webdevguru.tech/project/verve-commerce): Ultra-luxury headless storefront producing +290% checkout velocity.
+- [Chronos Capital Terminal](https://webdevguru.tech/project/chronos-terminal): Institutional fintech workspace with 0.32s global edge latency.
+- [Synthetix Health Labs](https://webdevguru.tech/project/synthetix-health): Next-gen longevity storefront delivering +340% subscription MRR.
+- [Kinetix Spatial OS](https://webdevguru.tech/project/kinetix-os): Spatial computing product launch with 14.2M launch views.
+- [Zenith Horology Guild](https://webdevguru.tech/project/zenith-horology): Luxury timepiece salon driving 4.8x VIP consultation inquiries.
 
 ## Studio Architecture
 - **Aesthetic**: Swiss Precision Architectural Carbon & International Vermilion

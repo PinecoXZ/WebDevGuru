@@ -225,13 +225,14 @@ const Home = () => {
           {/* Eyebrow Status Badge */}
           <div className="sticker-badge mb-3">
             <span className="badge-pulse-dot" />
-            <span>BESPOKE DIGITAL FLAGSHIPS &amp; SUB-SECOND ARCHITECTURE</span>
+            <span className="desktop-only-inline">BESPOKE DIGITAL FLAGSHIPS &amp; SUB-SECOND ARCHITECTURE</span>
+            <span className="mobile-only-inline">BESPOKE DIGITAL FLAGSHIPS</span>
           </div>
 
           {/* Main Statement Display Headline */}
           <h1 className="heading-display studio-hero-headline">
-            We Engineer High-Impact <br />
-            <span className="editorial-serif">Digital Flagships</span> That Convert.
+            We Engineer <br className="mobile-only-br" />High-Impact <br />
+            <span className="editorial-serif">Digital Flagships</span> <br className="mobile-only-br" />That Convert.
           </h1>
 
           {/* High-Converting Narrative Subtitle */}
@@ -434,6 +435,23 @@ const Home = () => {
                 key={project.id} 
                 className={`obsidian-card project-card-item ${idx === 0 ? 'project-hero-item' : ''}`}
               >
+                {/* Architectural Browser Mockup Chrome */}
+                <div className="browser-mockup-bar">
+                  <div className="browser-dots">
+                    <span className="b-dot close" />
+                    <span className="b-dot min" />
+                    <span className="b-dot max" />
+                  </div>
+                  <div className="browser-url-pill">
+                    <span className="browser-lock-icon">🔒</span>
+                    <span className="browser-url-text">{project.id}.webdevguru.tech</span>
+                  </div>
+                  <div className="browser-badge-edge">
+                    <span className="b-pulse" />
+                    <span>EDGE P99</span>
+                  </div>
+                </div>
+
                 <div className="project-image-wrap">
                   <img src={project.image} alt={project.alt} className="project-img" loading="lazy" />
                   <div className="project-image-overlay" />
@@ -484,33 +502,85 @@ const Home = () => {
           </div>
 
           <div className="capabilities-bento-grid">
-            {ARSENAL_CARDS.map((card, i) => {
+            {/* Primary Featured Flagship Card */}
+            {(() => {
+              const card = ARSENAL_CARDS[0];
               const IconComp = card.icon;
               return (
-                <div key={i} className="obsidian-card capability-bento-card">
-                  <div className="capability-icon-wrap">
-                    <IconComp size={24} weight="Outline" color="#ff3b00" />
-                  </div>
-                  <span className="label-mono" style={{ marginTop: '16px' }}>{card.badge}</span>
-                  <h3 className="capability-title">{card.title}</h3>
-                  <p className="capability-desc">{card.desc}</p>
-                  
-                  <div className="capability-metrics-list">
-                    {card.metrics.map((m, idx) => (
-                      <div key={idx} className="capability-metric-item">
-                        <CheckCircle size={14} weight="Filled" color="#10b981" />
-                        <span>{m}</span>
+                <div className="obsidian-card capability-bento-card featured-bento">
+                  <div>
+                    <div className="featured-bento-header">
+                      <div className="capability-icon-wrap">
+                        <IconComp size={26} weight="Outline" color="#ff3b00" />
                       </div>
-                    ))}
+                      <span className="sticker-badge">
+                        <span className="badge-pulse-dot" style={{ backgroundColor: '#00e599' }} />
+                        <span>PREMIER DISCIPLINE</span>
+                      </span>
+                    </div>
+
+                    <span className="label-mono" style={{ marginTop: '22px', display: 'block' }}>{card.badge}</span>
+                    <h3 className="capability-title" style={{ fontSize: '1.75rem', marginTop: '10px' }}>{card.title}</h3>
+                    <p className="capability-desc" style={{ fontSize: '0.98rem', marginTop: '12px', maxWidth: '520px' }}>{card.desc}</p>
+                    
+                    {/* Live Blueprint Architecture Tag Cloud */}
+                    <div className="featured-bento-blueprint">
+                      <div className="blueprint-tag">REACT 19 SPA</div>
+                      <div className="blueprint-tag">SUB-0.5s LCP</div>
+                      <div className="blueprint-tag">EDGE ANYCAST</div>
+                      <div className="blueprint-tag">FIGMA DESIGN TOKENS</div>
+                    </div>
                   </div>
 
-                  <Link to={card.link} className="btn-link capability-explore-link">
-                    <span>Explore Methodology</span>
-                    <ArrowUpRight size={14} weight="Outline" />
-                  </Link>
+                  <div>
+                    <div className="capability-metrics-list" style={{ marginTop: '24px' }}>
+                      {card.metrics.map((m, idx) => (
+                        <div key={idx} className="capability-metric-item">
+                          <CheckCircle size={15} weight="Filled" color="#10b981" />
+                          <span>{m}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Link to={card.link} className="btn btn-secondary capability-featured-cta" style={{ marginTop: '28px', width: '100%' }}>
+                      <span>Explore Flagship Methodology</span>
+                      <ArrowUpRight size={16} weight="Outline" />
+                    </Link>
+                  </div>
                 </div>
               );
-            })}
+            })()}
+
+            {/* Secondary Companion Cards Column */}
+            <div className="capabilities-bento-column">
+              {ARSENAL_CARDS.slice(1).map((card, i) => {
+                const IconComp = card.icon;
+                return (
+                  <div key={i} className="obsidian-card capability-bento-card">
+                    <div className="capability-icon-wrap">
+                      <IconComp size={24} weight="Outline" color="#ff3b00" />
+                    </div>
+                    <span className="label-mono" style={{ marginTop: '16px' }}>{card.badge}</span>
+                    <h3 className="capability-title">{card.title}</h3>
+                    <p className="capability-desc">{card.desc}</p>
+                    
+                    <div className="capability-metrics-list">
+                      {card.metrics.map((m, idx) => (
+                        <div key={idx} className="capability-metric-item">
+                          <CheckCircle size={14} weight="Filled" color="#10b981" />
+                          <span>{m}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Link to={card.link} className="btn-link capability-explore-link">
+                      <span>Explore Methodology</span>
+                      <ArrowUpRight size={14} weight="Outline" />
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -612,7 +682,7 @@ const Home = () => {
                   <Bolt size={14} weight="Filled" />
                   INTERACTIVE REVENUE SIMULATOR
                 </span>
-                <h3 className="heading-h2" style={{ marginTop: '8px', fontSize: '2rem' }}>
+                <h3 className="heading-h2 calc-heading" style={{ marginTop: '8px' }}>
                   Calculate Your <span className="editorial-serif">Latency Dividend.</span>
                 </h3>
                 <p className="text-body" style={{ marginTop: '10px', fontSize: '0.92rem' }}>

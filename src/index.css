@@ -1,10 +1,17 @@
 @import './styles/design-system.css';
 
 /* Minimal Global Adjustments */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 main {

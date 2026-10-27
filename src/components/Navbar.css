@@ -247,6 +247,18 @@
   }
 }
 
+@media (max-width: 640px) {
+  .studio-nav-cta {
+    display: none;
+  }
+  .studio-brand-tag {
+    display: none;
+  }
+  .studio-navbar {
+    gap: 12px;
+  }
+}
+
 /* Mobile Drawer Overlay */
 .studio-drawer-overlay {
   position: fixed;

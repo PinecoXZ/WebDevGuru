@@ -10,9 +10,18 @@ export interface ProjectItem {
   year: string;
 }
 
+export const LEGACY_PROJECT_ID_MAP: Record<string, string> = {
+  'dogemerch': 'lumina-ai',
+  'gigachad-crm': 'verve-commerce',
+  'brainrot-arcade': 'chronos-terminal',
+  'based-nutrition': 'synthetix-health',
+  'stonks-capital': 'kinetix-os',
+  'zenith-chrono': 'zenith-horology'
+};
+
 export const ALL_PROJECTS: ProjectItem[] = [
   { 
-    id: 'dogemerch', 
+    id: 'lumina-ai', 
     name: "Lumina AI Platform", 
     category: "AI & SaaS", 
     client: "Lumina Systems Inc.",
@@ -23,7 +32,7 @@ export const ALL_PROJECTS: ProjectItem[] = [
     year: "2026"
   },
   { 
-    id: 'gigachad-crm', 
+    id: 'verve-commerce', 
     name: "Verve Haute Commerce", 
     category: "Luxury D2C", 
     client: "Verve Atelier Paris",
@@ -34,7 +43,7 @@ export const ALL_PROJECTS: ProjectItem[] = [
     year: "2026"
   },
   { 
-    id: 'brainrot-arcade', 
+    id: 'chronos-terminal', 
     name: "Chronos Capital Terminal", 
     category: "Fintech & Web App", 
     client: "Chronos High-Frequency",
@@ -45,7 +54,7 @@ export const ALL_PROJECTS: ProjectItem[] = [
     year: "2025"
   },
   { 
-    id: 'based-nutrition', 
+    id: 'synthetix-health', 
     name: "Synthetix Health Labs", 
     category: "Biotech D2C", 
     client: "Synthetix Dynamics",
@@ -56,7 +65,7 @@ export const ALL_PROJECTS: ProjectItem[] = [
     year: "2025"
   },
   { 
-    id: 'stonks-capital', 
+    id: 'kinetix-os', 
     name: "Kinetix Spatial OS", 
     category: "Hardware & SaaS", 
     client: "Kinetix Technologies",
@@ -67,7 +76,7 @@ export const ALL_PROJECTS: ProjectItem[] = [
     year: "2025"
   },
   { 
-    id: 'zenith-chrono', 
+    id: 'zenith-horology', 
     name: "Zenith Horology Guild", 
     category: "Heritage Luxury", 
     client: "Zenith Horology Guild",

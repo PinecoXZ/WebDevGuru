@@ -15,16 +15,16 @@ export const getLocalBusinessSchema = () => ({
   "email": "hello@webdevguru.tech",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "100 Innovation Way, Suite 400",
-    "addressLocality": "San Francisco",
-    "addressRegion": "CA",
-    "postalCode": "94105",
-    "addressCountry": "US"
+    "streetAddress": "Bhubaneswar Tech Hub, Patia",
+    "addressLocality": "Bhubneshwar",
+    "addressRegion": "Odisha",
+    "postalCode": "751024",
+    "addressCountry": "IN"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "37.7937",
-    "longitude": "-122.3965"
+    "latitude": "20.2961",
+    "longitude": "85.8245"
   },
   "openingHoursSpecification": [
     {

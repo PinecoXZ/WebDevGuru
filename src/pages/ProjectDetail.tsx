@@ -4,7 +4,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import SEO from '../components/SEO';
 import { useSEO } from '../hooks/useSEO';
 import { useModal } from '../hooks/useModal';
-import { ALL_PROJECTS } from '../data/projects';
+import { ALL_PROJECTS, LEGACY_PROJECT_ID_MAP } from '../data/projects';
 import './ProjectDetail.css';
 
 interface ProjectDetailData {
@@ -16,7 +16,7 @@ interface ProjectDetailData {
 }
 
 const PROJECT_DETAILS_MAP: Record<string, ProjectDetailData> = {
-  'dogemerch': {
+  'lumina-ai': {
     challenge: "Lumina AI was losing high-intent enterprise pipeline due to 4.5-second initial bundle load times and dense, confusing technical product documentation.",
     solution: "We re-architected their entire digital presence with sub-second React 19, interactive live model playground previews, and friction-free enterprise demo funnels.",
     architecture: ["React 19 + Vite", "Edge Cloudflare CDN", "Interactive Model Canvas", "Sub-0.5s Global LCP", "PostHog Analytics Suite"],
@@ -36,7 +36,7 @@ const PROJECT_DETAILS_MAP: Record<string, ProjectDetailData> = {
       }
     ]
   },
-  'gigachad-crm': {
+  'verve-commerce': {
     challenge: "Verve Atelier's luxury customers were dropping off during checkout due to slow 5-second Shopify theme loads, multi-step forms, and lack of visual prestige.",
     solution: "Engineered an ultra-fast headless React storefront with sub-second transitions, interactive 3D lookbooks, and 1-click Apple Pay & multi-currency checkout.",
     architecture: ["Headless Shopify Storefront API", "React 19 SPA", "Dynamic Bundle Engine", "Edge Caching Architecture", "Tailored Luxury Micro-Interactions"],
@@ -56,7 +56,7 @@ const PROJECT_DETAILS_MAP: Record<string, ProjectDetailData> = {
       }
     ]
   },
-  'brainrot-arcade': {
+  'chronos-terminal': {
     challenge: "Chronos Capital needed an institutional trading terminal that converted both professional asset managers and retail power users without lag.",
     solution: "Crafted an obsidian dark workspace with real-time streaming WebSocket charts, zero layout shift, and sub-350ms edge response times.",
     architecture: ["Vite + React 19", "Lightweight Canvas 2D Charts", "WebSocket Realtime Feed", "Space Mono Data Typography", "Zero-JS Tracking Pixels"],
@@ -76,7 +76,7 @@ const PROJECT_DETAILS_MAP: Record<string, ProjectDetailData> = {
       }
     ]
   },
-  'based-nutrition': {
+  'synthetix-health': {
     challenge: "Synthetix Health was bleeding paid traffic because mobile visitors bounced off confusing supplement dosage charts and slow 6-step cart funnels.",
     solution: "Re-engineered the buyer journey into an intuitive regimen builder with instant biomarker breakdowns and 0.8s checkout transitions.",
     architecture: ["Shopify Liquid + React Island", "Modern Design Tokens", "Optimized WebP Delivery", "Instant Subscription Engine"],
@@ -96,7 +96,7 @@ const PROJECT_DETAILS_MAP: Record<string, ProjectDetailData> = {
       }
     ]
   },
-  'stonks-capital': {
+  'kinetix-os': {
     challenge: "Kinetix needed a cinematic spatial computing product launch page capable of handling millions of global impressions on launch day without slowdown.",
     solution: "Engineered a silky scroll-driven spatial hardware showcase with 60fps canvas animations, modular section reveals, and frictionless pre-order funnels.",
     architecture: ["React 19", "Scroll-Driven CSS & Canvas", "Global Anycast Edge CDN", "Interactive 3D Exploded Views"],
@@ -116,7 +116,7 @@ const PROJECT_DETAILS_MAP: Record<string, ProjectDetailData> = {
       }
     ]
   },
-  'zenith-chrono': {
+  'zenith-horology': {
     challenge: "Zenith Horology needed an ultra-luxury digital salon to connect with next-gen private collectors without diluting heritage prestige.",
     solution: "Crafted an obsidian dark showcase with high-res macro details, interactive horological movement displays, and private concierge bookings.",
     architecture: ["React 19", "Web Audio Haptics", "Private Concierge Scheduling", "Edge Hosting"],
@@ -142,13 +142,15 @@ const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>();
   const { openModal } = useModal();
 
-  const project = ALL_PROJECTS.find(p => p.id === id) || ALL_PROJECTS[0];
-  const details = (id && PROJECT_DETAILS_MAP[id]) ? PROJECT_DETAILS_MAP[id] : PROJECT_DETAILS_MAP['dogemerch'];
+  const isLegacy = id ? LEGACY_PROJECT_ID_MAP[id] : undefined;
+  const canonicalId = isLegacy || id;
+  const project = ALL_PROJECTS.find(p => p.id === canonicalId);
+  const details = canonicalId ? PROJECT_DETAILS_MAP[canonicalId] : undefined;
 
   const seoProps = useSEO({
-    title: `${project.name} Case Study — WebDevGuru Architecture`,
-    description: project.summary,
-    schema: {
+    title: project ? `${project.name} Case Study — WebDevGuru Architecture` : "Case Study — WebDevGuru",
+    description: project ? project.summary : "Bespoke digital architecture case study by WebDevGuru studio.",
+    schema: project ? {
       "@context": "https://schema.org",
       "@type": "CreativeWork",
       "name": `${project.name} Architecture Case Study`,
@@ -159,11 +161,17 @@ const ProjectDetail = () => {
       },
       "description": project.summary,
       "image": project.image
-    }
+    } : undefined
   });
 
+  // Handle legacy slug redirect for backwards compatibility
+  if (isLegacy) {
+    return <Navigate to={`/project/${isLegacy}`} replace />;
+  }
+
+  // Strict 404 routing when project is not found
   if (!project || !details) {
-    return <Navigate to="/work" replace />;
+    return <Navigate to="/404" replace />;
   }
 
   const currentIndex = ALL_PROJECTS.findIndex(p => p.id === project.id);

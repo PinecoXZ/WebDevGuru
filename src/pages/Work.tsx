@@ -67,7 +67,24 @@ const Work = () => {
         <div className="container">
           <div className="work-cards-grid grid-2">
             {filteredProjects.map((project) => (
-              <article key={project.id} className="work-item-card obsidian-card">
+              <article key={project.id} className="work-item-card obsidian-card" style={{ padding: 0, overflow: 'hidden' }}>
+                {/* Architectural Browser Mockup Chrome */}
+                <div className="browser-mockup-bar">
+                  <div className="browser-dots">
+                    <span className="b-dot close" />
+                    <span className="b-dot min" />
+                    <span className="b-dot max" />
+                  </div>
+                  <div className="browser-url-pill">
+                    <span className="browser-lock-icon">🔒</span>
+                    <span className="browser-url-text">{project.id}.webdevguru.tech</span>
+                  </div>
+                  <div className="browser-badge-edge">
+                    <span className="b-pulse" />
+                    <span>EDGE P99</span>
+                  </div>
+                </div>
+
                 <div className="work-item-media">
                   <img 
                     src={project.image} 
@@ -81,7 +98,7 @@ const Work = () => {
                   </div>
                 </div>
 
-                <div className="work-item-body">
+                <div className="work-item-body" style={{ padding: '28px' }}>
                   <div className="project-metric-pill">
                     <span>{project.metric}</span>
                   </div>

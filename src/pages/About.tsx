@@ -70,20 +70,92 @@ const About = () => {
         <div className="container">
           <div className="founder-grid">
             <div className="founder-media-card obsidian-card">
-              <div className="founder-image-wrapper">
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" 
-                  alt="Fayez - Founder and Lead Architect at WebDevGuru digital studio"
-                  className="founder-portrait-image"
-                  loading="lazy"
-                />
+              <div className="founder-image-wrapper founder-placeholder-wrapper" role="img" aria-label="Founder Portrait Placeholder - Principal Systems Architect">
+                <svg viewBox="0 0 400 500" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" className="founder-portrait-svg">
+                  <defs>
+                    <radialGradient id="portrait-ambient-glow" cx="50%" cy="36%" r="65%">
+                      <stop offset="0%" stopColor="rgba(255, 68, 56, 0.16)" />
+                      <stop offset="50%" stopColor="rgba(20, 24, 34, 0.85)" />
+                      <stop offset="100%" stopColor="#07080c" />
+                    </radialGradient>
+                    <linearGradient id="silhouette-head" x1="50%" y1="0%" x2="50%" y2="100%">
+                      <stop offset="0%" stopColor="#2c3342" />
+                      <stop offset="60%" stopColor="#181c26" />
+                      <stop offset="100%" stopColor="#0f1118" />
+                    </linearGradient>
+                    <linearGradient id="silhouette-body" x1="50%" y1="0%" x2="50%" y2="100%">
+                      <stop offset="0%" stopColor="#1c212d" />
+                      <stop offset="50%" stopColor="#12151e" />
+                      <stop offset="100%" stopColor="#090b10" />
+                    </linearGradient>
+                    <linearGradient id="rim-light" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="rgba(255,255,255,0.05)" />
+                      <stop offset="50%" stopColor="rgba(255,255,255,0.35)" />
+                      <stop offset="100%" stopColor="rgba(255,255,255,0.05)" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Ambient Backdrop */}
+                  <rect width="400" height="500" fill="url(#portrait-ambient-glow)" />
+
+                  {/* Shoulders & Torso Silhouette (Full & Wide) */}
+                  <path
+                    d="M 174 256
+                       C 152 268 116 288 78 322
+                       C 42 354 22 404 12 500
+                       L 388 500
+                       C 378 404 358 354 322 322
+                       C 284 288 248 268 226 256
+                       Z"
+                    fill="url(#silhouette-body)"
+                    stroke="rgba(255, 255, 255, 0.12)"
+                    strokeWidth="1.5"
+                  />
+
+                  {/* Subtle Collar Seam */}
+                  <path
+                    d="M 176 264 Q 200 320 224 264"
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.18)"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="200"
+                    y1="320"
+                    x2="200"
+                    y2="480"
+                    stroke="rgba(255, 255, 255, 0.08)"
+                    strokeWidth="1"
+                    strokeDasharray="3 3"
+                  />
+
+                  {/* Head Silhouette (Prominent & Centered) */}
+                  <circle
+                    cx="200"
+                    cy="164"
+                    r="72"
+                    fill="url(#silhouette-head)"
+                    stroke="rgba(255, 255, 255, 0.15)"
+                    strokeWidth="1.5"
+                  />
+
+                  {/* Top Specular Rim Light */}
+                  <path
+                    d="M 148 132 C 162 102 238 102 252 132"
+                    fill="none"
+                    stroke="url(#rim-light)"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </div>
               <div className="founder-card-meta">
                 <div>
                   <h3 className="founder-name">Fayez</h3>
                   <p className="founder-role text-muted">Founder &amp; Principal Systems Architect</p>
                 </div>
-                <div className="category-pill">SAN FRANCISCO &bull; REMOTE</div>
+                <div className="category-pill">BHUBNESHWAR, INDIA &bull; REMOTE</div>
               </div>
             </div>
 
